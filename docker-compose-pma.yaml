@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - "${PMA_ACCESS_PORT}:80"
+    networks:
+      - mysql-net
+
+networks:
+  mysql-net:
+    driver: bridge

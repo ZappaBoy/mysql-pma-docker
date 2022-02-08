@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    container_name: db
+    env_file:
+      - .env
+    ports:
+      - "${DB_PORT}:3306"
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    networks:
+      - mysql-net
+    restart: unless-stopped
+networks:
+  mysql-net:
+    driver: bridge
